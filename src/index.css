@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Russo+One&family=Orbitron:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 25 100% 5%;
+    --foreground: 40 100% 95%;
+
+    --card: 25 80% 8%;
+    --card-foreground: 40 100% 95%;
+
+    --popover: 25 80% 8%;
+    --popover-foreground: 40 100% 95%;
+
+    --primary: 35 100% 50%;
+    --primary-foreground: 25 100% 5%;
+
+    --secondary: 15 100% 45%;
+    --secondary-foreground: 40 100% 95%;
+
+    --muted: 25 40% 15%;
+    --muted-foreground: 35 30% 60%;
+
+    --accent: 120 80% 45%;
+    --accent-foreground: 25 100% 5%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 60% 25%;
+    --input: 35 60% 25%;
+    --ring: 35 100% 50%;
+
+    --radius: 0.5rem;
+
+    --dragon-orange: 25 100% 55%;
+    --dragon-red: 0 85% 50%;
+    --dragon-blue: 210 100% 55%;
+    --dragon-yellow: 45 100% 55%;
+    --dragon-gold: 40 100% 50%;
+    --ki-glow: 195 100% 60%;
+    --power-up: 55 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Russo One', sans-serif;
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  .font-bangers {
+    font-family: 'Bangers', cursive;
+  }
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+  .font-russo {
+    font-family: 'Russo One', sans-serif;
+  }
+}
+
+/* Dragon Ball Star */
+.dragon-ball {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, hsl(45 100% 75%), hsl(35 100% 50%), hsl(25 100% 40%));
+  box-shadow: 
+    inset -5px -5px 15px rgba(0,0,0,0.3),
+    inset 5px 5px 15px rgba(255,255,200,0.4),
+    0 0 20px rgba(255,165,0,0.5),
+    0 0 40px rgba(255,165,0,0.3);
+  position: relative;
+}
+
+.dragon-ball::after {
+  content: '★';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: hsl(0 85% 45%);
+  font-size: 24px;
+  text-shadow: 0 0 5px rgba(200,0,0,0.5);
+}
+
+/* Ki Aura Effect */
+@keyframes ki-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255,200,0,0.3), 0 0 60px rgba(255,200,0,0.1);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(255,200,0,0.6), 0 0 100px rgba(255,200,0,0.3);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-15px) rotate(5deg); }
+  66% { transform: translateY(-8px) rotate(-3deg); }
+}
+
+@keyframes power-up-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes energy-ring {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 0.4; }
+  100% { transform: scale(0.8) rotate(360deg); opacity: 0.8; }
+}
+
+@keyframes spark {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0); opacity: 0; }
+}
+
+@keyframes lightning {
+  0%, 90%, 100% { opacity: 0; }
+  92%, 95% { opacity: 1; }
+}
+
+.ki-aura {
+  animation: ki-pulse 2s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Swipe Slider */
+.swipe-slider {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+.swipe-panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, clip-path;
+}
+
+/* Energy particles */
+@keyframes particle-float {
+  0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+  10% { opacity: 1; scale: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-20vh) translateX(50px) scale(0.5); opacity: 0; }
+}
+
+.energy-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: hsl(var(--power-up));
+  animation: particle-float linear infinite;
+  pointer-events: none;
+}
+
+/* Countdown */
+.countdown-box {
+  background: linear-gradient(135deg, hsl(25 80% 10%), hsl(25 60% 15%));
+  border: 2px solid hsl(var(--primary) / 0.5);
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+}
+
+/* Power button */
+.power-button {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--dragon-red)));
+  border: 3px solid hsl(var(--dragon-yellow));
+  box-shadow: 
+    0 0 20px hsl(var(--primary) / 0.5),
+    0 0 60px hsl(var(--primary) / 0.2),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.power-button:hover {
+  box-shadow: 
+    0 0 40px hsl(var(--primary) / 0.8),
+    0 0 100px hsl(var(--primary) / 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+.power-button:active {
+  transform: scale(0.98);
+}
+
+/* WhatsApp button */
+.whatsapp-button {
+  background: linear-gradient(135deg, hsl(120 60% 40%), hsl(120 80% 35%));
+  border: 3px solid hsl(120 80% 55%);
+  box-shadow: 0 0 25px hsl(120 80% 45% / 0.5);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  box-shadow: 0 0 50px hsl(120 80% 45% / 0.7);
+  transform: scale(1.05);
+}
+
+/* Google Maps button */
+.maps-button {
+  background: linear-gradient(135deg, hsl(210 80% 45%), hsl(210 100% 35%));
+  border: 3px solid hsl(210 90% 60%);
+  box-shadow: 0 0 25px hsl(210 90% 50% / 0.5);
+  transition: all 0.3s ease;
+}
+
+.maps-button:hover {
+  box-shadow: 0 0 50px hsl(210 90% 50% / 0.7);
+  transform: scale(1.05);
+}
+
+.ki-blast-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.ki-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(195 100% 80%), hsl(195 100% 60%), hsl(210 100% 50%));
+  box-shadow: 0 0 20px hsl(195 100% 60%), 0 0 60px hsl(195 100% 40%);
+  animation: ki-orb-pulse 1.5s ease-in-out infinite;
+}
+
+.ki-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 2px solid hsl(195 100% 60% / 0.6);
+  transform: translate(-50%, -50%);
+  animation: ki-ring-expand 2s ease-out infinite;
+}
+
+.ki-ring-1 { width: 50px; height: 50px; animation-delay: 0s; }
+.ki-ring-2 { width: 50px; height: 50px; animation-delay: 0.6s; }
+.ki-ring-3 { width: 50px; height: 50px; animation-delay: 1.2s; }
+
+@keyframes ki-orb-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px hsl(195 100% 60%), 0 0 60px hsl(195 100% 40%); }
+  50% { transform: translate(-50%, -50%) scale(1.3); box-shadow: 0 0 40px hsl(195 100% 60%), 0 0 100px hsl(195 100% 40%); }
+}
+
+@keyframes ki-ring-expand {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+}
+
+/* Character Showcase */
+.ki-character-aura {
+  animation: ki-pulse 2.5s ease-in-out infinite;
+  filter: blur(20px);
+}
+
+@keyframes character-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.character-float {
+  animation: character-float 3s ease-in-out infinite;
+}
+
+/* Ki Sparks on characters */
+.ki-spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: ki-spark-fly 1.5s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ki-spark-fly {
+  0% { transform: scale(1) translateY(0); opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { transform: scale(0) translateY(-30px); opacity: 0; }
+}
+
+/* Ki charge beam effect */
+.ki-charge-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(195 100% 60%), transparent);
+  animation: ki-charge-sweep 2s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+@keyframes ki-charge-sweep {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* Shenlong movement */
+.shenlong-motion {
+  animation: shenlong-float 9s ease-in-out infinite;
+  filter: drop-shadow(0 0 22px hsl(var(--accent) / 0.45));
+}
+
+@keyframes shenlong-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-3deg) scale(1);
+  }
+  30% {
+    transform: translate3d(18px, -12px, 0) rotate(2deg) scale(1.02);
+  }
+  60% {
+    transform: translate3d(-14px, 10px, 0) rotate(-1deg) scale(0.98);
+  }
+}
