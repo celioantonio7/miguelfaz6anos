@@ -9,7 +9,7 @@ import gokuImg from '@/assets/goku.png';
 import shenlongImg from '@/assets/shenlong.png';
 
 const PARTY_DATE = new Date('2026-03-22T12:00:00');
-const WHATSAPP_LINK = 'https://wa.link/xbk1bh';
+const WHATSAPP_LINK = 'https://wa.link/83m70u';
 const GOOGLE_MAPS_LINK = 'https://www.google.com/maps/place/R.+Carlos+Henrique+Mangeon+-+Recanto+dos+Eucaliptos,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP,+12226-638/@-23.2201083,-45.8241749,17z/data=!3m1!4b1!4m6!3m5!1s0x94cc4caeeb72a84f:0xb193b54bd214f45a!8m2!3d-23.2201133!4d-45.8216!16s%2Fg%2F11fj9k9xdx?entry=ttu&g_ep=EgoyMDI2MDMxMC4wIKXMDSoASAFQAw%3D%3D';
 
 const PANELS = [
